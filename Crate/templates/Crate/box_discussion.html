@@ -1,25 +1,117 @@
 {% extends "base.html" %}
-{% load bootstrap3 %}
 {% load static %}
 
 {% block title %}
-    <title>Discussion about Interest Group: {{ interest_group }}</title>
+    <title>{{ subcategory }}</title>
 {% endblock %}
 
 {% block content %}
-    <p>No current discussions!</p>
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="/">CrateUrself</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right";>
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#services">Service</a>
+
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#crate">Crate</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#explore">Explore</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#team">Team</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                    <li role="presentation" class="dropdown">
+                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                             Account <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-right" >
+                             <li style=>
+                                  <a style="color:black" href="/register">Login</a>
+                             </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-heading">Discussion</div>
+                <section id="interestGroup" class="bg-light-gray">
+                    <div class="container">
+                        <div class="row" style="color:black">
+                            <p>No current discussions!</p>
     <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <form role="form" method="post" class="form-horizontal">
-                    {% csrf_token %}
-                    {{ form }}
-                    <button type="submit" class="btn btn-primary" style="width: 100%">
-                        Submit
-                    </button>
-                </form>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-4 col-md-offset-4">
+                                        <form role="form" method="post" class="form-horizontal">
+                                            {% csrf_token %}
+                                            {{ form }}
+                                            <button type="submit" class="btn btn-primary" style="width: 100%">
+                                                Submit
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
-    </div>
+    </header>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="copyright">Copyright &copy; Databaes 2017</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li><a href="https://www.facebook.com/CrateUrself-1587285857978476/"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="https://twitter.com/?request_context=signup"><i class="fa fa-twitter"></i></a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+                <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                        <li><a href="#">Privacy Policy</a>
+                        </li>
+                        <li><a href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 {% endblock %}

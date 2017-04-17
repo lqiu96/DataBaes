@@ -23,6 +23,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
     {% block style %}
     {% endblock %}
 
@@ -48,11 +49,32 @@
     <!-- Theme JavaScript -->
     <script src="{% static 'js/agency.min.js' %}" defer></script>
 
+
     {% block title %}
     {% endblock %}
 </head>
 
 <body>
+
+<style>
+
+     .fa {
+    padding: 6px;
+    font-size: 30px;
+    width: 41px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+	}
+	.fa-twitter {
+    background: #55ACEE;
+    color: white;
+	}
+	.fa-facebook {
+    background: #3B5998;
+    color: white;
+	}
+</style>
 
 {% block content %}
 {% endblock %}
