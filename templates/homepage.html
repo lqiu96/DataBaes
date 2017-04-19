@@ -230,35 +230,79 @@
 
 
     <section id="crate">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Monthly Featured Items</h2>
-                    <h3 class="section-subheading text-muted">Vote for Boxes with your favorite items!</h3>
-                </div>
-            </div>
-            <div class="row">
-                <!-- TODO: Make the p tag display a min height (some item names are very long) -->
-                {% for item in items %}
-                    <div class="col-md-4 col-sm-6 portfolio-item">
-                        <div class="portfolio-caption">
-                            <img src="{% static 'images/poorcrate.png' %}" class="img-responsive"
-                                 style="display: block; margin: auto">
-                            <h4 style="text-align: center">{{ item.item_name }}</h4>
-                            {% if item.item_description %}
-                                <p class="text-muted" style="text-align: center">{{ item.item_description }}</p>
-                            {% else %}
-                                <p class="text-muted" style="text-align: center">No description</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% empty %}
-                    <b class="col-lg-12 text-center">No Featured Monthly Items!</b>
-                {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Monthly Featured Items</h2>
+                <h3 class="section-subheading text-muted">Vote for Boxes with your favorite items!</h3>
             </div>
         </div>
-    </section>
-    <!-- STOP MOVING THIS KAM -->
+        <div class="row">
+            <!-- TODO: Make the p tag display a min height (some item names are very long) -->
+
+            <div class="carousel slide" id="myCarousel">
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <ul class="thumbnails">
+                            {% for item in items %}
+                            <div class="col-md-4 col-sm-6 portfolio-item">
+                                <div class="portfolio-caption">
+                                    <img src="{% static 'images/poorcrate.png' %}" class="img-responsive"
+                                         style="display: block; margin: auto">
+                                    <h4 style="text-align: center">{{ item.item_name }}</h4>
+                                    {% if item.item_description %}
+                                    <p class="text-muted" style="text-align: center">{{ item.item_description }}</p>
+                                    {% else %}
+                                    <p class="text-muted" style="text-align: center">No description</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% empty %}
+                            <b class="col-lg-12 text-center">No Featured Monthly Items!</b>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="item">
+                        <ul class="thumbnails">
+                            {% for item in items %}
+                            <div class="col-md-4 col-sm-6 portfolio-item">
+                                <div class="portfolio-caption">
+                                    <img src="{% static 'images/poorcrate.png' %}" class="img-responsive"
+                                         style="display: block; margin: auto">
+                                    <h4 style="text-align: center">{{ item.item_name }}</h4>
+                                    {% if item.item_description %}
+                                    <p class="text-muted" style="text-align: center">{{ item.item_description }}</p>
+                                    {% else %}
+                                    <p class="text-muted" style="text-align: center">No description</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% empty %}
+                            <b class="col-lg-12 text-center">No Featured Monthly Items!</b>
+                            {% endfor %}
+                        </ul>
+                    </div><!-- /Slide2 -->
+                    <!-- /Slide3 -->
+                </div>
+
+
+                <nav>
+                    <ul class="control-box pager">
+                        <li><a data-slide="prev" href="#myCarousel" class=""><i
+                                class="glyphicon glyphicon-chevron-left"></i></a></li>
+                        <li><a data-slide="next" href="#myCarousel" class=""><i
+                                class="glyphicon glyphicon-chevron-right"></i></li>
+                    </ul>
+                </nav>
+                <!-- /.control-box -->
+
+            </div><!-- /#myCarousel -->
+
+        </div>
+    </div>
+</section>
+    <!-- STOP MOVING THIS KAM
+    <!--Voting period end date should be the first thing people see, but w/e-->
     <div class="counter">
         <h3>VOTING PERIOD ENDS IN:</h3>
         <div id="countdown">
