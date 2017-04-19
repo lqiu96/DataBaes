@@ -59,7 +59,7 @@ def category(request, category_name):
     subcategory_interest_map = {}
     for subcategory in get_list_or_404(SubCategory, category__category_name=category_name):
         changed = False
-        for interest_group in InterestGroup.objects.filter(subcategory_name=subcategory):
+        for interest_group in InterestGroup.objects.filter(subcategory=subcategory):
             if subcategory_interest_map.get(subcategory) is None:
                 subcategory_interest_map[subcategory] = [interest_group]
             else:
