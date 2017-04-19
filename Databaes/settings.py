@@ -47,11 +47,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'Crate',
-    'account',
     'payment',
     'bootstrap3',
-    'registration',
     'pinax.stripe',
+    'account',
+    'pinax_theme_bootstrap',
+    'bootstrapform',
+    'user_profile',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +65,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #'pinax.stripe.middleware.ActiveSubscriptionMiddleware',
+    "account.middleware.LocaleMiddleware",
+    "account.middleware.TimezoneMiddleware",
 ]
 
 ROOT_URLCONF = 'Databaes.urls'
@@ -79,6 +83,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "account.context_processors.account",
+                'pinax_theme_bootstrap.context_processors.theme'
             ],
         },
     },
@@ -142,13 +148,11 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Django-registration-redux Variables
+# Account Settings
 SITE_ID = 1
-ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window; you may, of course, use a different value.
-REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
-LOGIN_URL = 'homepage'  # The page users are directed to if they are not logged in
-# and are trying to access pages requiring authentication
-LOGIN_REDIRECT_URL = 'homepage'  # The page you want users to arrive at after they successful log in
+ACCOUNT_EMAIL_UNIQUE = True
+ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Pinax Stripe Settings and Variables

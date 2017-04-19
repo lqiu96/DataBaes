@@ -18,17 +18,15 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from account.views import UserRegistrationFormView, LoginView, logout_view
+#from account.views import UserRegistrationFormView, LoginView, logout_view
 from . import views
 
 urlpatterns = [
     url(r'^$', views.homepage, name='homepage'),
+    url(r'^$', views.homepage, name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^crate/', include('Crate.urls')),
     url(r'^payment/', include('payment.urls')),
-    url(r'^login/', LoginView.as_view(), name='login'),
-    url(r'^logout/', logout_view, name='logout'),
-    url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^register/', UserRegistrationFormView.as_view(), name='register'),
+    url(r"^account/", include("account.urls")),
     url(r'^payments/', include('pinax.stripe.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -70,10 +70,10 @@ class SellingOrder(models.Model):
     """
     supplier = models.ForeignKey(Supplier, on_delete=models.PROTECT)
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
-    item_id = models.ForeignKey('Crate.Item', related_name='item_id_sold_by', on_delete=models.PROTECT)
+    item = models.ForeignKey('Crate.Item', related_name='item_id_sold_by', on_delete=models.PROTECT)
 
     def __str__(self):
-        return 'SellingOrder- Supplier:{}, Order #{}, Item: {}'.format(self.supplier, self.order, self.item_id)
+        return 'SellingOrder- Supplier:{}, Order #{}, Item: {}'.format(self.supplier, self.order, self.item)
 
 
 class Category(models.Model):
@@ -107,7 +107,7 @@ class SubCategory(models.Model):
     Note: Foreign Key is set to Protect so that the Category should never be deleted
     """
     subcategory_name = models.CharField(max_length=30, primary_key=True)
-    category_name = models.ForeignKey(Category, on_delete=models.PROTECT)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
     subcategory_description = models.CharField(max_length=100, blank=True)
     subcategory_image = models.ImageField(upload_to=generate_unique_file_name, blank=True)
 
@@ -134,7 +134,7 @@ class InterestGroup(models.Model):
     interest_group_name = models.CharField(max_length=30)
     subscription_cost = models.DecimalField(max_digits=6, decimal_places=2)
     interest_group_description = models.CharField(max_length=100, blank=True)
-    subcategory_name = models.ForeignKey(SubCategory, on_delete=models.PROTECT)
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.PROTECT)
     have = models.ManyToManyField('Crate.Item', blank=True)
     interest_group_image = models.ImageField(upload_to=generate_unique_file_name, blank=True)
 
@@ -159,16 +159,16 @@ class Vote(models.Model):
     1. One to Many with Item                        --In This Model
     2. One to Many with Selling Cycle               --In This Model
     """
-    item_id = models.ForeignKey('Crate.Item', on_delete=models.PROTECT)
+    item = models.ForeignKey('Crate.Item', on_delete=models.PROTECT)
     selling_cycle = models.ForeignKey('Crate.SellingCycle', on_delete=models.PROTECT)
     vote_score = models.IntegerField(default=0, validators=[positive_vote_validator])
 
     # Gives guarantee that an item in two selling cycles can be voted on
     class Meta:
-        unique_together = ('item_id', 'selling_cycle')
+        unique_together = ('item', 'selling_cycle')
 
     def __str__(self):
-        return 'Votes- Item: {}, Selling Cycle: {}'.format(self.item_id, self.selling_cycle)
+        return 'Votes- Item: {}, Selling Cycle: {}'.format(self.item, self.selling_cycle)
 
 
 def validate_month_start(date):
@@ -204,7 +204,6 @@ class Box(models.Model):
     3. Many to Many with Items                      --In 'Item' Model
     4. Many to One with Interest Groups             --In This Model
     """
-    # TODO: Perhaps create a box_name?
     sold_during = models.ForeignKey(SellingCycle, on_delete=models.PROTECT)
     type = models.ForeignKey(InterestGroup, on_delete=models.PROTECT)
 
@@ -213,7 +212,7 @@ class Box(models.Model):
         unique_together = ('sold_during', 'type')
 
     def __str__(self):
-        return 'Box #{}'.format(self.id)
+        return 'Box #{} {} {}'.format(self.id, str(self.type), str(self.sold_during))
 
 
 def positive_quantity_validator(quantity):

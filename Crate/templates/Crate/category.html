@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    <title>{{ subcategory }}</title>
+    <title>{{ subcategory.subcategory_name }}</title>
 {% endblock %}
 
 {% block content %}
@@ -20,7 +20,7 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right" ;>
+                <ul class="nav navbar-nav navbar-right">
                     <li role="presentation" class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                            aria-expanded="false">
@@ -76,26 +76,30 @@
     <header>
         <div class="container">
             <div class="intro-text">
-                <div class="intro-heading">Discussion</div>
+                <div class="intro-heading">Subcategories</div>
                 <section id="interestGroup" class="bg-light-gray">
                     <div class="container">
-                        <div class="row" style="color:black">
-                            <p>No current discussions!</p>
-                            <br>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-4 col-md-offset-4">
-                                        <form role="form" method="post" class="form-horizontal">
-                                            {% csrf_token %}
-                                            {{ form }}
-                                            <button type="submit" class="btn btn-primary" style="width: 100%">
-                                                Submit
-                                            </button>
-                                        </form>
+                        <div class="row">
+                            {% for subcategory, interest_group in subcategory.items %}
+                                <!-- category_width is calculated as being 100 / num_subcategories -->
+                                <div class="col-md-4 col-sm-6 crate-item" style="width: {{ subcategory_width }}%">
+                                    <!-- Make the static images automatic -->
+                                    {% if subcategory.subcategory_image %}
+                                        <img src="{{ subcategory.subcategory_image.url }}">
+                                    {% endif %}
+                                    <div class="crate-caption">
+                                        <h1 style="color:#000000">{{ subcategory.subcategory_name }}</h1>
+                                        {% if subcategory_subcategory_description %}
+                                            <p class="text-muted">{{ subcategory.subcategory_description }}</p>
+                                        {% else %}
+                                            <p class="text-muted">No description</p>
+                                        {% endif %}
                                     </div>
+                                    <a class="page-scroll btn btn-primary"
+                                       href="{% url 'subcategory' category_name=category subcategory_name=subcategory.subcategory_name %}">
+                                        Click here for {{ subcategory.subcategory_name }}'s Interest Groups</a>
                                 </div>
-                            </div>
-
+                            {% endfor %}
                         </div>
                     </div>
                 </section>

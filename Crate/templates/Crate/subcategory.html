@@ -20,44 +20,49 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right";>
+                <ul class="nav navbar-nav navbar-right">
                     <li role="presentation" class="dropdown">
-                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                             Account <span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-menu-right" >
-                             <li style=>
-                                  <a style="color:black" href="pathtomanagesubscription">Manage Subscriptions</a>
-                             </li>
-                             <li style=>
-                                  <a style="color:black" href="pathtoaccountsettings">Account Settings</a>
-                             </li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                           aria-expanded="false">
+                            Account <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li style=>
+                                <a style="color:black" href="pathtomanagesubscription">Manage Subscriptions</a>
+                            </li>
+                            <li style=>
+                                <a style="color:black" href="pathtoaccountsettings">Account Settings</a>
+                            </li>
                         </ul>
                     </li>
 
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span
+                                class="caret"></span></a>
                         <ul id="login-dp" class="dropdown-menu">
                             <li>
-                                 <div class="row">
-                                        <div class="col-md-12">
-                                             <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" name="username" placeholder="Username">
-                                                    </div>
-                                                    <div class="form-group">
-                                                         <input type="text" class="form-control" name="password" placeholder="Password">
-                                                    </div>
-                                                    <div class="form-group">
-                                                         <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                                    </div>
-                                             </form>
-                                        </div>
-                                        <div class="bottom text-center" style="color:#000000;">
-                                            New? <a href="/register">
-                                                            <b style="color:#FFFFFF;">Sign up here.</b>
-                                                     </a>
-                                        </div>
-                                 </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form class="form" role="form" method="post" action="login"
+                                              accept-charset="UTF-8" id="login-nav">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="username"
+                                                       placeholder="Username">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="password"
+                                                       placeholder="Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="bottom text-center" style="color:#000000;">
+                                        New? <a href="/register">
+                                        <b style="color:#FFFFFF;">Sign up here.</b>
+                                    </a>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </li>
@@ -96,7 +101,7 @@
                                         {% endfor %}
                                     </ul>
                                     <a class="page-scroll btn btn-primary"
-                                       href="{% url 'box_discussion' interest_group_name=interest.interest_group_name %}">
+                                       href="{% url 'box_discussion' category_name=category subcategory_name=subcategory interest_group_name=interest.interest_group_name %}">
                                         Click here for {{ interest.interest_group_name }}'s discussion</a>
                                 </div>
                                 <!-- TODO: Add a vote button -->
@@ -116,11 +121,11 @@
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline social-buttons">
-                        <li><a href="https://www.facebook.com/CrateUrself-1587285857978476/"><i class="fa fa-facebook"></i></a>
+                        <li><a href="https://www.facebook.com/CrateUrself-1587285857978476/"><i
+                                class="fa fa-facebook"></i></a>
                         </li>
                         <li><a href="https://twitter.com/?request_context=signup"><i class="fa fa-twitter"></i></a>
                         </li>
-
                     </ul>
                 </div>
                 <div class="col-md-4">

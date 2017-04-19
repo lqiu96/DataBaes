@@ -103,9 +103,6 @@
 
 {% endblock %}
 
-
-
-
 {% block content %}
     <!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -121,7 +118,7 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right";>
+                <ul class="nav navbar-nav navbar-right" ;>
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
@@ -142,29 +139,33 @@
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span
+                                class="caret"></span></a>
                         <ul id="login-dp" class="dropdown-menu">
                             <li>
-                                 <div class="row">
-                                        <div class="col-md-12">
-                                             <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" name="username" placeholder="Username">
-                                                    </div>
-                                                    <div class="form-group">
-                                                         <input type="text" class="form-control" name="password" placeholder="Password">
-                                                    </div>
-                                                    <div class="form-group">
-                                                         <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                                    </div>
-                                             </form>
-                                        </div>
-                                        <div class="bottom text-center" style="color:#000000;">
-                                            New? <a href="/register">
-                                                            <b style="color:#fed136;">Sign up here.</b>
-                                                     </a>
-                                        </div>
-                                 </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form class="form" role="form" method="post" action="login"
+                                              accept-charset="UTF-8" id="login-nav">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="username"
+                                                       placeholder="Username">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="password"
+                                                       placeholder="Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="bottom text-center" style="color:#000000;">
+                                        New? <a href="/register">
+                                        <b style="color:#fed136;">Sign up here.</b>
+                                    </a>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </li>
@@ -227,13 +228,8 @@
     <!-- IMAGES NEED TO BE  360x260-->
     <!-- DONT USE PNG THEY LOOK BAD DUE TO NO BORDER-->
 
-<div class="counter">
-        <h3>VOTING PERIOD ENDS IN:</h3>
-        <div id="countdown">
-        </div><!-- /#Countdown Div -->
-    </div> <!-- /.Counter Div -->
 
-    <section id="crate" >
+    <section id="crate">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -262,6 +258,12 @@
             </div>
         </div>
     </section>
+    <!-- STOP MOVING THIS KAM -->
+    <div class="counter">
+        <h3>VOTING PERIOD ENDS IN:</h3>
+        <div id="countdown">
+        </div><!-- /#Countdown Div -->
+    </div> <!-- /.Counter Div -->
 
     <!-- Explore Section -->
     <section id="explore" class="bg-light-gray">
@@ -301,7 +303,7 @@
                         <p class="text-muted">Lead Programmer</p>
                     </div>
                 </div>
-				<div class="col-sm-2">
+                <div class="col-sm-2">
                     <div class="team-member">
                         <img src="{% static 'images/Steve.png' %}" class="img-responsive img-circle" alt="">
                         <h4>Jesse Rong</h4>
@@ -315,7 +317,7 @@
                         <p class="text-muted">Programmer</p>
                     </div>
                 </div>
-				<div class="col-sm-2">
+                <div class="col-sm-2">
                     <div class="team-member">
                         <img src="{% static 'images/Steve.png' %}" class="img-responsive img-circle" alt="">
                         <h4>Kam Wai Li</h4>
@@ -384,7 +386,8 @@
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline social-buttons">
-                        <li><a href="https://www.facebook.com/CrateUrself-1587285857978476/"><i class="fa fa-facebook"></i></a>
+                        <li><a href="https://www.facebook.com/CrateUrself-1587285857978476/"><i
+                                class="fa fa-facebook"></i></a>
                         </li>
                         <li><a href="https://twitter.com/CrateUrself"><i class="fa fa-twitter"></i></a>
                         </li>
