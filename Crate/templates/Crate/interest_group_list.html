@@ -86,37 +86,45 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
+
     <!-- Header -->
     <header>
         <div class="container">
             <div class="intro-text">
                 <div class="intro-heading">Interest Groups</div>
-                <section id="interestGroup" class="bg-light-gray">
-                    <div class="container">
-                        <div class="row">
-                            {% for interest_group in interest_groups %}
-                                <!-- category_width is calculated as being 100 / num_subcategories -->
-                                <div class="col-md-4 col-sm-6 crate-item" style="width: {{ interest_width }}%">
-                                    <!-- Make the static images automatic -->
-                                    {% if interest_group.interest_group_image %}
-                                        <img src="{{ interest_group.interest_group_image.url }}">
-                                    {% endif %}
-                                    <div class="crate-caption">
-                                        <h1 style="color:#000000">{{ interest_group.interest_group_name }}</h1>
-                                        {% if interest_group.interest_group_description %}
-                                            <p class="text-muted">{{ interest_group.interest_group_description }}</p>
-                                        {% else %}
-                                            <p class="text-muted">No description</p>
+                <div class="container">
+                    <div class="row">
+                        {% for interest_group in interest_groups %}
+                            <div class="col-md-6 text-center">
+                                <div class="panel panel-danger panel-pricing">
+                                    <div class="panel-image">
+                                        {% if interest_group.interest_group_image %}
+                                            <img src="{{ interest_group.interest_group_image.url }}">
                                         {% endif %}
                                     </div>
-                                    <a class="page-scroll btn btn-primary"
-                                       href="{% url 'box_discussion' category_name=category_name subcategory_name=subcategory_name interest_group_name=interest_group.interest_group_name %}">
-                                        Learn more about {{ interest_group.interest_group_name }}</a>
+                                    <ul class="list-group text-center">
+                                        <li class="list-group-item" style="color:#000000">
+                                            <b>{{ interest_group.interest_group_name }}</b></li>
+                                        {% if interest_group.interest_group_description %}
+                                            <li class="list-group-item">
+                                                <p class="text-muted">{{ interest_group.interest_group_description }}</p>
+                                            </li>
+                                        {% else %}
+                                            <li class="list-group-item">
+                                                <p class="text-muted">No description</p>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                    <div class="panel-footer">
+                                        <a class="btn btn-lg btn-block btn-danger page-scroll btn-primary"
+                                           href="{% url 'box_discussion' category_name=category_name subcategory_name=subcategory_name interest_group_name=interest_group.interest_group_name %}">
+                                            Explore {{ interest_group.interest_group_name }}</a>
+                                    </div>
                                 </div>
-                            {% endfor %}
-                        </div>
+                            </div>
+                        {% endfor %}
                     </div>
-                </section>
+                </div>
             </div>
         </div>
     </header>
