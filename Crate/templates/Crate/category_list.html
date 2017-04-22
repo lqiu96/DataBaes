@@ -80,64 +80,54 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
+
     <!-- Header -->
-<header>
-    <div class="container">
-        <div class="intro-text">
-            <div class="intro-heading">Categories</div>
-            <section id="crate">
-
-                <div class="container">
-                    <div class="row">
-
-                        <!-- item -->
-
-
-                        {% for category, subcategory_list in category_map.items %}
-                        <!-- category_width is calculated as being 100 / num_subcategories -->
-                        <div class="col-md-6 text-center">
-                            <div class="panel panel-danger panel-pricing">
-                                <div class="panel-heading">
-                                    {% if category.category_image %}
-                                    <img src="{{ category.category_image.url }}">
-                                    {% endif %}
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-heading">Categories</div>
+                <section id="crate">
+                    <div class="container">
+                        <div class="row">
+                            <!-- item -->
+                            {% for category, subcategory_list in category_map.items %}
+                                <!-- category_width is calculated as being 100 / num_subcategories -->
+                                <div class="col-md-6 text-center">
+                                    <div class="panel panel-danger panel-pricing">
+                                        <div class="panel-image">
+                                            {% if category.category_image %}
+                                                <img src="{{ category.category_image.url }}">
+                                            {% endif %}
+                                        </div>
+                                        <ul class="list-group text-center">
+                                            <li class="list-group-item" style="color:#000000">
+                                                <b>{{ category.category_name }}</b></li>
+                                            {% if category.category_description %}
+                                                <li class="list-group-item">
+                                                    <p class="text-muted">{{ category.category_description }}</p>
+                                                </li>
+                                            {% else %}
+                                                <li class="list-group-item">
+                                                    <p class="text-muted">No description</p>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                        <div class="panel-footer">
+                                            <a class="btn btn-lg btn-block btn-danger page-scroll btn-primary"
+                                               href="{% url 'subcategory_list' category_name=category.category_name %}">
+                                                Explore {{ category.category_name }}</a>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <ul class="list-group text-center">
-                                    <li style="color:#000000">{{ category.category_name }}</li>
-                                    {% if category.category_description %}
-                                    <li class="list-group-item"><p class="text-muted">{{ category.category_description}}</p>
-                                    </li>
-                                    {% else %}
-                                    <li class="list-group-item"><i class="fa fa-check"></i>
-                                        <p class="text-muted">No description</p>
-                                    </li>
-                                    {% endif %}
-                                </ul>
-                                <div class="panel-footer">
-                                    <a class="btn btn-lg btn-block btn-danger"
-                                       href="{% url 'subcategory_list' category_name=category.category_name %}"> Explore
-                                        {{ category.category_name }} </a>
-                                </div>
-                            </div>
+                            {% empty %}
+                                <b class="col-lg-12 text-center" style="color: black">No Categories to choose from!</b>
+                            {% endfor %}
                         </div>
-
-
-                        {% empty %}
-                        <b class="col-lg-12 text-center" style="color: black">No Categories to choose from!</b>
-                        {% endfor %}
-
-
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
-        </section>
-    </div>
-    </div>
-</header>
-
-	    <br/><br/><br/>
+    </header>
 
     <footer>
         <div class="container">
@@ -145,22 +135,20 @@
                 <div class="col-md-4">
                     <span class="copyright">Copyright &copy; Databaes 2017</span>
                 </div>
-
                 <div class="col-md-4">
                     <ul class="list-inline social-buttons">
-                        <li><a href="https://www.facebook.com/CrateUrself-1587285857978476/"><i
-                                class="fa fa-facebook"></i></a>
+                        <li><a href="https://www.facebook.com/CrateUrself-1587285857978476/">
+                            <i class="fa fa-facebook"></i></a>
                         </li>
-                        <li><a href="https://twitter.com/?request_context=signup"><i class="fa fa-twitter"></i></a>
+                        <li><a href="https://twitter.com/?request_context=signup">
+                            <i class="fa fa-twitter"></i></a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline quicklinks">
-                        <li><a href="#">Privacy Policy</a>
-                        </li>
-                        <li><a href="#">Terms of Use</a>
-                        </li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
                     </ul>
                 </div>
             </div>

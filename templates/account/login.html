@@ -4,27 +4,20 @@
 {% load i18n %}
 {% load bootstrap %}
 
-{% block head_title %}{% trans "Log in" %}{% endblock %}
+{% block head_title %}
+    {% trans "Log in" %}
+{% endblock %}
 
-html, body {
-height: 100%;
-}
-.allign {
-width: 100%;
-height: 100%;
-display: table;
-text-align: center;
-}
-
-<section>
-    {% block body %}
+{% block body %}
     <section>
         <div class="row">
             <div class="col-md-4">
             </div>
             <div class="col-md-4">
-                <form method="POST" action="{% url "account_login" %}" autocapitalize="off" {% if form.is_multipart %}
-                      enctype="multipart/form-data"{% endif %}>
+                <form method="POST" action="{% url "account_login" %}" autocapitalize="off"
+                        {% if form.is_multipart %}
+                      enctype="multipart/form-data"
+                        {% endif %}>
                     <legend>{% trans "Log in to an existing account" %}</legend>
                     {% csrf_token %}
                     {{ form|bootstrap }}
@@ -50,14 +43,13 @@ text-align: center;
         </div>
     </section>
 
-    {% endblock %}
+{% endblock %}
 
-    {% block scripts %}
+{% block scripts %}
     {{ block.super }}
     <script type="text/javascript">
         $(document).ready(function () {
             $('#id_username').focus();
         });
-
     </script>
-    {% endblock %}
+{% endblock %}

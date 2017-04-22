@@ -6,9 +6,7 @@
     <title>Vote on Crate #{{ box_id }}</title>
 {% endblock %}
 
-
 {% block content %}
-
 	<!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container">
@@ -20,8 +18,9 @@
                 </button>
                 <a class="navbar-brand page-scroll" href="/">CrateUrself</a>
             </div>
+
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="navbar navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a class="page-scroll" href="{% url 'category_list' %}">Category</a>
@@ -86,32 +85,33 @@
         <!-- /.container-fluid -->
     </nav>
 	
-	
-    <section id="portfolio" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Vote for your favorite items</h2>
-                </div>
-            </div>
-            <div class="row">
-                {% for item in items %}
-                    <div class="col-md-4 col-sm-6 portfolio-item" style="width: {{ box_width }}%">
-                        <!-- TODO: add links-->
-                        <a href="" class="portfolio-link" data-toggle="modal">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="{% static 'images/poorcrate.png' %}" class="img-responsive" alt="">
-                        </a>
-                        <p style="text-align: center">{{ item.item_name }}</p>
-                        <button class="page-scroll btn btn-primary">Vote for {{ item.item_name }}</button>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
+	<header>
+		<div class="container">
+            <div class="intro-text">
+                <div class="intro-heading">Vote on your favorite items</div>
+				<section id="portfolio" class="bg-light-gray">
+						<div class="container">
+							<div class="row">
+								{% for item in items %}
+									<div class="col-md-4 col-sm-6 portfolio-item" style="width: {{ box_width }}%">
+										<!-- TODO: add links-->
+										<a href="" class="portfolio-link" data-toggle="modal">
+											<div class="portfolio-hover">
+												<div class="portfolio-hover-content">
+													<i class="fa fa-plus fa-3x"></i>
+												</div>
+											</div>
+											<img src="{% static 'images/poorcrate.png' %}" class="img-responsive" alt="">
+										</a>
+										<p style="text-align: center; color:#000000">{{ item.item_name }}</p>
+										<button class="page-scroll btn btn-primary">Vote for {{ item.item_name }}</button>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+				</section>
+			</div>
+		</div>
+	</header>
 
 {% endblock %}
