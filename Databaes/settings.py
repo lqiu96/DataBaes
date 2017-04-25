@@ -150,7 +150,7 @@ USE_TZ = True
 SITE_ID = 1
 ACCOUNT_EMAIL_UNIQUE = True
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
-THEME_CONTACT_EMAIL = 'crateurself@email.com'
+THEME_CONTACT_EMAIL = 'crateurself@gmail.com'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

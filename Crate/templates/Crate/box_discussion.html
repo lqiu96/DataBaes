@@ -4,7 +4,36 @@
 {% block title %}
     <title>{{ interest_group_name }}</title>
 {% endblock %}
-
+{% block style %}
+<style>
+@media (min-width: 768px) {
+  section {
+    padding: 100px 0;
+  }
+}
+@media (min-width: 768px) {
+  header .intro-text {
+    padding-top: 200px;
+    padding-bottom: 200px;
+  }
+  header .intro-text .intro-lead-in {
+    font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: italic;
+    font-size: 40px;
+    line-height: 40px;
+    margin-bottom: 25px;
+  }
+  header .intro-text .intro-heading {
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 75px;
+    line-height: 75px;
+    margin-bottom: 50px;
+  }
+}
+</style>
+{% endblock %}
 {% block content %}
     <!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -100,30 +129,37 @@
             <div class="intro-text">
                 <div class="intro-heading">{{ interest_group_name }}</div>
                 <section id="crate" class="bg-light-gray">
-                    <div class="container">
                         <div class="row">
-                            <div class="col-md-4 crate-item" style="float: left">
-                                <h3 style="color: black">4513</h3>
-                                <p style="color: black">Followers</p>
-                                <h3 style="color: black">25</h3>
-                                <p style="color: black">Following</p>
+                            <div class="col-md-6" >
+                                <h1> Image?
                             </div>
-                            <div class="col-md-4 crate-item">
+							<div class="col-md-6 offset-md-6">
                                 <h2 style="color: black">Subscribe to vote on this month's items</h2>
-                                <p style="color: black">Purchase now for ${{ cost }}</p>
+								<i><p class="text-muted">Box Description</p></i>
+								<p style="color: black">Purchase now for ${{ cost }}</p>
                             </div>
                         </div>
-                    </div>
-                    <br>
-                    <div class="container">
                         <div class="row">
-                            <div class="crate-caption">
+							<div class="col-md-6">
+								<div class="container">
+									<div class="col-md-3">
+										<h3 style="color: black">Followers</p>
+										<h3 style="color: black">Following</p>
+									</div>
+									<div class="col-md-3 offset-md-3">
+										<h3 style="color: black">4513</h3>
+										<h3 style="color: black">25</h3>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 offset-md-6" >
+								<br>
+								<br>
                                 <a class="page-scroll btn btn-primary" href="{% url 'box_item_vote' 1 %}">
                                     Vote on Box 1's items
                                 </a>
-                            </div>
+							</div>
                         </div>
-                    </div>
                 </section>
             </div>
         </div>
