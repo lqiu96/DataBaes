@@ -4,36 +4,41 @@
 {% block title %}
     <title>{{ interest_group_name }}</title>
 {% endblock %}
+
 {% block style %}
-<style>
-@media (min-width: 768px) {
-  section {
-    padding: 100px 0;
-  }
-}
-@media (min-width: 768px) {
-  header .intro-text {
-    padding-top: 200px;
-    padding-bottom: 200px;
-  }
-  header .intro-text .intro-lead-in {
-    font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-style: italic;
-    font-size: 40px;
-    line-height: 40px;
-    margin-bottom: 25px;
-  }
-  header .intro-text .intro-heading {
-    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 75px;
-    line-height: 75px;
-    margin-bottom: 50px;
-  }
-}
-</style>
+    <style>
+        @media (min-width: 768px) {
+            section {
+                padding: 100px 0;
+            }
+        }
+
+        @media (min-width: 768px) {
+            header .intro-text {
+                padding-top: 200px;
+                padding-bottom: 200px;
+            }
+
+            header .intro-text .intro-lead-in {
+                font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-style: italic;
+                font-size: 40px;
+                line-height: 40px;
+                margin-bottom: 25px;
+            }
+
+            header .intro-text .intro-heading {
+                font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 75px;
+                line-height: 75px;
+                margin-bottom: 50px;
+            }
+        }
+    </style>
 {% endblock %}
+
 {% block content %}
     <!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -127,45 +132,45 @@
     <header>
         <div class="container">
             <div class="intro-text">
-                <div class="intro-heading">{{ interest_group_name }}</div>
+                <div class="intro-heading">{{ interest_group.interest_group_name }}</div>
                 <section id="crate" class="bg-light-gray">
-                        <div class="row">
-                            <div class="col-md-6" >
-                                <h1> Image?
-                            </div>
-							<div class="col-md-6 offset-md-6">
-                                <h2 style="color: black">Subscribe to vote on this month's items</h2>
-								<i><p class="text-muted">Box Description</p></i>
-								<p style="color: black">Purchase now for ${{ cost }}</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="{{ interest_group.interest_group_image.url }}">
+                        </div>
+                        <div class="col-md-6 offset-md-6">
+                            <h2 style="color: black">Subscribe to vote on this month's items</h2>
+                            <p class="text-muted">Box Description</p>
+                            <p style="color: black">Purchase now for ${{ interest_group.subscription_cost }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="container">
+                                <div class="col-md-3">
+                                    <h3 style="color: black">Followers</h3>
+                                    <h3 style="color: black">Following</h3>
+                                </div>
+                                <div class="col-md-3 offset-md-3">
+                                    <h3 style="color: black">4513</h3>
+                                    <h3 style="color: black">25</h3>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-							<div class="col-md-6">
-								<div class="container">
-									<div class="col-md-3">
-										<h3 style="color: black">Followers</p>
-										<h3 style="color: black">Following</p>
-									</div>
-									<div class="col-md-3 offset-md-3">
-										<h3 style="color: black">4513</h3>
-										<h3 style="color: black">25</h3>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6 offset-md-6" >
-								<br>
-								<br>
-                                <a class="page-scroll btn btn-primary" href="{% url 'box_item_vote' 1 %}">
-                                    Vote on Box 1's items
-                                </a>
-							</div>
+                        <div class="col-md-6 offset-md-6">
+                            <br>
+                            <br>
+                            <a class="page-scroll btn btn-primary" href="{% url 'box_item_vote' box_id=box.id %}">
+                                Vote on Box {{ box.id }}'s items
+                            </a>
                         </div>
+                    </div>
                 </section>
             </div>
         </div>
     </header>
 
-    <section id="discussion" class="bg-light-gray">
+    <section id="discussion">
         <div class="container">
             <div class="row">
                 <div class="intro-text">
@@ -186,11 +191,11 @@
             {% if user.is_authenticated %}
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
-                        <form role="form" method="post" class="form-horizontal">
+                        <form role="form" name="discussion" method="post" class="form-horizontal">
                             {% csrf_token %}
-                            {{ form }}
+                            {{ discussion_form }}
                             <button type="submit" class="btn btn-primary" style="width: 100%">
-                                Submit
+                                Submit Comment
                             </button>
                         </form>
                     </div>
@@ -199,6 +204,30 @@
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
                         <p style="text-align: center">Please log in to comment.</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <section id="report" class="bg-light-gray">
+        <div class="container">
+            {% if user.is_authenticated %}
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <form role="form" method="post" class="form-horizontal">
+                            {% csrf_token %}
+                            {{ report_form }}
+                            <button type="submit" class="btn btn-primary" style="width: 100%">
+                                Submit Report
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <p style="text-align: center">Please log in to send a report.</p>
                     </div>
                 </div>
             {% endif %}

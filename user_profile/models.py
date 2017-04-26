@@ -15,7 +15,7 @@ class Report(models.Model):
     the reference won't be changed to null, so report will always reference
     a valid box or user
     """
-    report = models.CharField(max_length=500)
+    report = models.TextField(max_length=500)
     box = models.ForeignKey('Crate.Box', on_delete=models.PROTECT)
     user = models.ForeignKey('user_profile.UserProfile', on_delete=models.PROTECT)
 

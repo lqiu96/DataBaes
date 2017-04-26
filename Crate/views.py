@@ -4,8 +4,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_list_or_404
 from django.views.generic import View
 
+from user_profile.models import Report
 from user_profile.models import UserProfile
-from .forms import DiscussionForm
+from .forms import DiscussionForm, ReportForm
 from .models import Category, SubCategory, InterestGroup, SellingCycle, Box, Item, Discussion, Vote
 
 
@@ -42,32 +43,35 @@ class BoxVoteFormView(View):
         return HttpResponseRedirect('')
 
 
-class DiscussionFormView(View):
-    form_class = DiscussionForm
-
-    def get(self, request, *args, **kwargs):
-        form = DiscussionForm()
-        interest_group_name = kwargs['interest_group_name']
-        interest_group = InterestGroup.objects.get(interest_group_name=interest_group_name)
-        discussions = Discussion.objects.filter(interest=interest_group).order_by('-pk')[:10]
-        return render(request, 'Crate/box_discussion.html',
-                      {'category_name': kwargs['category_name'],
-                       'subcategory_name': kwargs['subcategory_name'],
-                       'interest_group_name': interest_group_name,
-                       'cost': interest_group.subscription_cost,
-                       'discussions': discussions,
-                       'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = DiscussionForm(request.POST)
-        if form.is_valid():
-            comment = form.cleaned_data.get('comment')
-            user = UserProfile.objects.get(user=request.user)
-            interest_group = InterestGroup.objects.get(interest_group_name=kwargs['interest_group_name'])
+def discussion_report_page(request, category_name, subcategory_name, interest_group_name):
+    interest_group = InterestGroup.objects.get(interest_group_name=interest_group_name)
+    discussions = Discussion.objects.filter(interest=interest_group).order_by('-pk')[:10]
+    curr_selling_cycle = SellingCycle.objects.filter(cycle_date__lte=date.today()).order_by('-cycle_date').first()
+    interest_group = InterestGroup.objects.get(interest_group_name=interest_group_name)
+    box = Box.objects.filter(sold_during=curr_selling_cycle, type=interest_group).get()
+    if request.method == 'POST':
+        user = UserProfile.objects.get(user=request.user)
+        discussion_form = DiscussionForm(request.POST)
+        if discussion_form.is_valid():
+            comment = discussion_form.cleaned_data['comment']
             Discussion.objects.create(comment=comment, user=user, interest=interest_group)
             return HttpResponseRedirect('')
-        else:
+        report_form = ReportForm(request.POST)
+        if report_form.is_valid():
+            report = report_form.cleaned_data['report']
+            Report.objects.create(report=report, user=user, box=box)
             return HttpResponseRedirect('')
+    else:
+        discussion_form = DiscussionForm()
+        report_form = ReportForm()
+    return render(request, 'Crate/box_discussion.html',
+                  {'category_name': category_name,
+                   'subcategory_name': subcategory_name,
+                   'interest_group': interest_group,
+                   'discussions': discussions,
+                   'box': box,
+                   'discussion_form': discussion_form,
+                   'report_form': report_form})
 
 
 def category_list(request):

@@ -14,7 +14,7 @@ urlpatterns = [
         views.interest_group_list, name='interest_group_list'),
     # Page that displays the discussion for the given interest group
     url(r'^(?P<category_name>(([\w]+)\s?)+)/(?P<subcategory_name>(([\w]+)\s?)+)/(?P<interest_group_name>(([\w]+)\s?)+)/$',
-        views.DiscussionFormView.as_view(), name='box_discussion'),
+        views.discussion_report_page, name='box_discussion'),
     # Page that allows users to vote on a box
     url(r'^(?P<box_id>[\d]+)/vote$', views.BoxVoteFormView.as_view(), name='box_item_vote'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
