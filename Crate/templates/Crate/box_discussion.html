@@ -161,7 +161,11 @@
                             </div>
                         </div>
                         <div class="col-md-6 offset-md-6">
-							{% if has_subscription %}
+							{% if not user.is_authenticated %}
+							<a class="btn btn-primary" href="{% url 'account_login' %}">
+								Please login to participate!
+							</a>
+							{% elif has_subscription %}
 							<a class="page-scroll btn btn-primary" href="{% url 'box_item_vote' box_id=box.id %}">
                                 Vote on Box {{ box.id }}'s items
                             </a>

@@ -49,13 +49,14 @@ class BoxVoteFormView(View):
 
 
 def discussion_report_page(request, category_name, subcategory_name, interest_group_name):
-    
-    user=request.user
-    customer=get_customer_for_user(user)
-    plan = Plan.objects.get(name=interest_group_name)
-    plan_id = plan.id
-    has_subscription = has_active_subscription_with_plan(customer, plan_id)
-    
+    is_logged_in = request.user.is_authenticated()
+    has_subscription = False
+    if(is_logged_in):
+        customer=get_customer_for_user(request.user)
+        plan = Plan.objects.get(name=interest_group_name)
+        plan_id = plan.id
+        has_subscription = has_active_subscription_with_plan(customer, plan_id)
+        
     interest_group = InterestGroup.objects.get(interest_group_name=interest_group_name)
     discussions = Discussion.objects.filter(interest=interest_group).order_by('-pk')[:10]
     curr_selling_cycle = SellingCycle.objects.filter(cycle_date__lte=date.today()).order_by('-cycle_date').first()
