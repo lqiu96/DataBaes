@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="bottom text-center" style="color:#000000;">
                                             New? <a href="/account/signup">
-                                            <b style="color:#FFFFFF;"> Sign up here.</b>
+                                            <b style="color:#FFFFFF;">Sign up here.</b>
                                         </a>
                                         </div>
                                     </div>
@@ -94,7 +94,11 @@
                         <div class="row">
                             {% for item in items %}
                                 <div class="col-md-4 col-sm-6 portfolio-item" style="width: {{ box_width }}%">
-                                    <img src="{% static 'images/poorcrate.png' %}" class="img-responsive" alt="">
+                                    {% if item.item_image %}
+                                        <img src="{{ item.item_image.url }}" class="img-responsive" alt="">
+                                    {% else %}
+                                        <p style="color: black">No image</p>
+                                    {% endif %}
                                     <p style="text-align: center; color:#000000">{{ item.item_name }}</p>
                                     <form method="post">
                                         {% csrf_token %}

@@ -259,6 +259,7 @@ class Item(models.Model):
     price_per_item = models.DecimalField(max_digits=6, decimal_places=2)
     contained_in = models.ManyToManyField(Box, blank=True)
     sold_by = models.ManyToManyField(Supplier, through=SellingOrder, blank=True)
+    item_image = models.ImageField(upload_to=generate_unique_file_name, blank=True)
 
     def __str__(self):
         return 'Item- {}'.format(self.item_name)
