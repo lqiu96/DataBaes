@@ -21,6 +21,7 @@ from django.contrib import admin
 #from account.views import UserRegistrationFormView, LoginView, logout_view
 from . import views
 from user_profile.views import SignupView
+from payment.views import customPaymentMethodCreateView
 
 urlpatterns = [
     url(r'^$', views.homepage, name='homepage'),
@@ -28,6 +29,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^crate/', include('Crate.urls')),
     url(r"^account/signup/$", SignupView.as_view(), name="account_signup"),
+    url(r"^payments/payment-methods/create/$", customPaymentMethodCreateView.as_view(), name="pinax_stripe_payment_method_create"),
     url(r"^account/", include("account.urls")),
     url(r'^payments/', include('pinax.stripe.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
