@@ -20,7 +20,7 @@ class BoxVoteFormView(View):
         curr_selling_cycle = SellingCycle.objects.filter(cycle_date__lte=date.today()).order_by('-cycle_date').first()
         box_vote = Box.objects.filter(sold_during=curr_selling_cycle, id=kwargs['box_id'])
         items = []
-        for item in Item.objects.filter(contained_in=box_vote):
+        for item in Item.objects.filter(contained_in=box_vote)[:4]:
             items.append(item)
             BoxVoteFormView.item_name[item.item_name] = item
         if len(items) == 0:
