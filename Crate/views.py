@@ -8,6 +8,11 @@ from user_profile.models import Report
 from user_profile.models import UserProfile
 from .forms import DiscussionForm, ReportForm
 from .models import Category, SubCategory, InterestGroup, SellingCycle, Box, Item, Discussion, Vote
+from pinax.stripe.actions.customers import get_customer_for_user
+from pinax.stripe.actions import subscriptions
+from pinax.stripe.models import Plan
+from django.shortcuts import redirect
+from .middleware import has_active_subscription_with_plan
 
 
 # Create your views here.
@@ -44,6 +49,13 @@ class BoxVoteFormView(View):
 
 
 def discussion_report_page(request, category_name, subcategory_name, interest_group_name):
+    
+    user=request.user
+    customer=get_customer_for_user(user)
+    plan = Plan.objects.get(name=interest_group_name)
+    plan_id = plan.id
+    has_subscription = has_active_subscription_with_plan(customer, plan_id)
+    
     interest_group = InterestGroup.objects.get(interest_group_name=interest_group_name)
     discussions = Discussion.objects.filter(interest=interest_group).order_by('-pk')[:10]
     curr_selling_cycle = SellingCycle.objects.filter(cycle_date__lte=date.today()).order_by('-cycle_date').first()
@@ -71,7 +83,8 @@ def discussion_report_page(request, category_name, subcategory_name, interest_gr
                    'discussions': discussions,
                    'box': box,
                    'discussion_form': discussion_form,
-                   'report_form': report_form})
+                   'report_form': report_form,
+                   'has_subscription': has_subscription})
 
 
 def category_list(request):
@@ -129,3 +142,14 @@ def interest_group_list(request, category_name, subcategory_name):
                    'subcategory_name': subcategory_name,
                    'interest_groups': interest_groups,
                    'interest_width': interest_width})
+                   
+
+
+def subscribe(request, category_name, subcategory_name, interest_group_name):
+    print(interest_group_name)
+    user = request.user
+    customer = get_customer_for_user(user)
+    plan = Plan.objects.get(name=interest_group_name)
+    plan_id = plan.stripe_id
+    subscriptions.create(customer, plan_id)
+    return redirect("box_discussion", category_name=category_name, subcategory_name=subcategory_name, interest_group_name=interest_group_name)

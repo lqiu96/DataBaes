@@ -17,4 +17,7 @@ urlpatterns = [
         views.discussion_report_page, name='box_discussion'),
     # Page that allows users to vote on a box
     url(r'^(?P<box_id>[\d]+)/vote$', views.BoxVoteFormView.as_view(), name='box_item_vote'),
+    # Page that allows users to subscribe to a box
+    url(r'^(?P<category_name>(([\w]+)\s?)+)/(?P<subcategory_name>(([\w]+)\s?)+)/(?P<interest_group_name>(([\w]+)\s?)+)/subscribe$',
+        views.subscribe, name='subscribe'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

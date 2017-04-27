@@ -161,14 +161,15 @@
                             </div>
                         </div>
                         <div class="col-md-6 offset-md-6">
-                            <a class="page-scroll btn btn-primary" href="">
-                                Subscribe
-                            </a>
-                            <br>
-                            <br>
-                            <a class="page-scroll btn btn-primary" href="{% url 'box_item_vote' box_id=box.id %}">
+							{% if has_subscription %}
+							<a class="page-scroll btn btn-primary" href="{% url 'box_item_vote' box_id=box.id %}">
                                 Vote on Box {{ box.id }}'s items
                             </a>
+                            {% else %}
+                            <a class="btn btn-primary" href="{% url 'subscribe' category_name=category_name subcategory_name=subcategory_name interest_group_name=interest_group.interest_group_name %}">
+								Subscribe
+							</a>
+							{% endif %}
                         </div>
                     </div>
                 </section>
