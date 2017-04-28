@@ -51,11 +51,21 @@ class BoxVoteFormView(View):
 def discussion_report_page(request, category_name, subcategory_name, interest_group_name):
     is_logged_in = request.user.is_authenticated()
     has_subscription = False
+    has_default_payment_source = False
+    # Check if the user is currently logged in
+    # If yes: check if the user has an active subscription with the given interest group
     if is_logged_in:
         customer = get_customer_for_user(request.user)
         plan = Plan.objects.get(name=interest_group_name)
         plan_id = plan.id
         has_subscription = has_active_subscription_with_plan(customer, plan_id)
+        # Check if the user has a defaul payment source to charge if they choose to subscribe
+        print("default source: ")
+        print(customer.default_source)
+        if (customer.default_source == ''):
+            has_default_payment_source = False
+        else:
+            has_default_payment_source = True
 
     interest_group = InterestGroup.objects.get(interest_group_name=interest_group_name)
     discussions = Discussion.objects.filter(interest=interest_group).order_by('-pk')[:10]
@@ -89,7 +99,8 @@ def discussion_report_page(request, category_name, subcategory_name, interest_gr
                    'count': subscription_count,
                    'discussion_form': discussion_form,
                    'report_form': report_form,
-                   'has_subscription': has_subscription})
+                   'has_subscription': has_subscription,
+                   'has_default_payment_source': has_default_payment_source})
 
 
 def category_list(request):

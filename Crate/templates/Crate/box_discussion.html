@@ -36,6 +36,10 @@
                 margin-bottom: 50px;
             }
         }
+		.top-buffer { 
+			margin-top:50px; 
+		}
+
     </style>
 {% endblock %}
 
@@ -147,7 +151,7 @@
                             <p style="color: black">Purchase now for ${{ interest_group.subscription_cost }}</p>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row top-buffer">
                         <div class="col-md-6">
                             <div class="container">
                                 <div class="col-md-3">
@@ -163,6 +167,15 @@
 							<a class="btn btn-primary" href="{% url 'account_login' %}">
 								Please login to participate!
 							</a>
+							{% elif not has_default_payment_source %}
+							<h4 style="color:black">
+								Please add a payment method before you can subscribe to this box!
+							</h4>
+							<p>
+								<a class="btn btn-primary" href="{% url 'pinax_stripe_payment_method_list' %}">
+									Manage payment methods
+								</a>
+							</p>
 							{% elif has_subscription %}
 							<a class="page-scroll btn btn-primary" href="{% url 'box_item_vote' box_id=box.id %}">
                                 Vote on Box {{ box.id }}'s items
@@ -203,7 +216,7 @@
                         <form role="form" name="discussion" method="post" class="form-horizontal">
                             {% csrf_token %}
                             {{ discussion_form }}
-                            <button type="submit" class="btn btn-primary" style="width: 100%">
+                            <button type="submit" class="btn btn-primary" style="width: 95%">
                                 Submit Comment
                             </button>
                         </form>
@@ -227,7 +240,7 @@
                         <form role="form" method="post" class="form-horizontal">
                             {% csrf_token %}
                             {{ report_form }}
-                            <button type="submit" class="btn btn-primary" style="width: 100%">
+                            <button type="submit" class="btn btn-primary" style="width: 95%">
                                 Submit Report
                             </button>
                         </form>
