@@ -149,10 +149,11 @@ USE_TZ = True
 # Account Settings
 SITE_ID = 1
 ACCOUNT_EMAIL_UNIQUE = True
-ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = False
+ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
+
 THEME_CONTACT_EMAIL = 'crateurself@gmail.com'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Pinax Stripe Settings and Variables
 PINAX_STRIPE_PUBLIC_KEY = 'pk_test_XCcdTdwGIrUPzSeAJ8ImmFcR'
