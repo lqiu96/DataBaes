@@ -154,6 +154,11 @@ ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 THEME_CONTACT_EMAIL = 'crateurself@gmail.com'
 
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'crateurself@gmail'
+EMAIL_HOST_PASSWORD = 'Databaes1!'
 
 # Pinax Stripe Settings and Variables
 PINAX_STRIPE_PUBLIC_KEY = 'pk_test_XCcdTdwGIrUPzSeAJ8ImmFcR'
