@@ -4,8 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.shortcuts import render, get_list_or_404
 from django.views.generic import View
-from pinax.stripe.actions import subscriptions
-from pinax.stripe.actions.customers import get_customer_for_user
+from pinax.stripe.actions import customers, charges, invoices, subscriptions
 from pinax.stripe.models import Plan, Subscription
 
 from user_profile.models import Report
@@ -13,7 +12,6 @@ from user_profile.models import UserProfile
 from .forms import DiscussionForm, ReportForm
 from .middleware import has_active_subscription_with_plan
 from .models import Category, SubCategory, InterestGroup, SellingCycle, Box, Item, Discussion, Vote
-
 
 # Create your views here.
 
@@ -55,7 +53,7 @@ def discussion_report_page(request, category_name, subcategory_name, interest_gr
     # Check if the user is currently logged in
     # If yes: check if the user has an active subscription with the given interest group
     if is_logged_in:
-        customer = get_customer_for_user(request.user)
+        customer = customers.get_customer_for_user(request.user)
         plan = Plan.objects.get(name=interest_group_name)
         plan_id = plan.id
         has_subscription = has_active_subscription_with_plan(customer, plan_id)
@@ -163,9 +161,12 @@ def interest_group_list(request, category_name, subcategory_name):
 def subscribe(request, category_name, subcategory_name, interest_group_name):
     print(interest_group_name)
     user = request.user
-    customer = get_customer_for_user(user)
+    customer = customers.get_customer_for_user(user)
     plan = Plan.objects.get(name=interest_group_name)
     plan_id = plan.stripe_id
     subscriptions.create(customer, plan_id)
+    customers.sync_customer(customer)
+    invoices.sync_invoices_for_customer(customer)
+    charges.sync_charges_for_customer(customer)
     return redirect("box_discussion", category_name=category_name, subcategory_name=subcategory_name,
                     interest_group_name=interest_group_name)
